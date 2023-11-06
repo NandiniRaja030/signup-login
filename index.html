@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up / Login</title>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#signUpButton").click(function(button){
+			if ($("#displaySignUp").css("display") === "none") {
+				if($("#displayLogin").css("display") === "block") {
+					$("#displayLogin").hide();
+				}             
+			   $("#displaySignUp").show();
+			}
+		});
+		$("#loginButton").click(function(button){
+			if ($("#displayLogin").css("display") === "none") {
+				if($("#displaySignUp").css("display") === "block") {
+					$("#displaySignUp").hide();
+				}             
+			   $("#displayLogin").show();
+			}
+		});
+
+		var Suname;
+		var Spword;
+		$("#submitS").click(function() {
+			let Semail = $("#supEmail").val();
+			let Sfname = $("#supFName").val();
+			let Slname = $("#supLName").val();
+			Suname = $("#supUName").val();
+			Spword = $("#supPword").val();
+			let Scpword = $("#supCPword").val();
+			var regName = /^[a-zA-Z]+$/;
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			var erro = 1;
+
+			if(Semail == "") {
+				$("#err1a").html("Enter E-mail ID");
+				if(erro == 1) {
+					$("#supEmail").focus();
+					erro = 2;
+				}
+			}
+			else if (!Semail.match(mailformat)) {
+				$("#err1a").html("Invalid E-mail ID");
+				if(erro == 1) {
+					$("#supEmail").focus();
+					erro = 2;
+				}
+			}
+			else {
+				$("#err1a").html("&nbsp;");
+			}
+
+			if(Sfname == "") {
+				$("#err1b").html("Enter First Name");
+				if(erro == 1) {
+					$("#supFName").focus();
+					erro = 2;
+				}
+			}
+			else if(regName.test(Sfname)) {
+				$("#err1b").html("&nbsp;");
+			}
+			else {
+				$("#err1b").html("Invalid First Name");
+				if(erro == 1) {
+					$("#supFName").focus();
+					erro = 2;
+				}
+			}
+
+			if(Slname == "") {
+				$("#err1c").html("Enter Last Name");
+				if(erro == 1) {
+					$("#supLName").focus();
+					erro = 2;
+				}
+			}
+			else if(regName.test(Slname)) {
+				$("#err1c").html("&nbsp;");
+			}
+			else {
+				$("#err1c").html("Invalid Last Name");
+				if(erro == 1) {
+					$("#supLName").focus();
+					erro = 2;
+				}
+			}
+
+			if(Suname == "") {
+				$("#err1d").html("Enter UserName");
+				if(erro == 1) {
+					$("#supUName").focus();
+					erro = 2;
+				}
+			}
+			else {
+				$("#err1d").html("&nbsp;");
+			}
+
+			if(Spword == "") {
+				$("#err1e").html("Enter Password");
+				if(erro == 1) {
+					$("#supPword").focus();
+					erro = 2;
+				}
+			}
+			else if(Spword>99999999) {
+				$("#err1e").html("Password Too Big (8 num)");
+				if(erro == 1) {
+					$("#supPword").focus();
+					erro = 2;
+				}
+			}
+			else if(Spword<10000000) {
+				$("#err1e").html("Password Too Small (8 num)");
+				if(erro == 1) {
+					$("#supPword").focus();
+					erro = 2;
+				}
+			}
+			else {
+				$("#err1e").html("&nbsp;");
+			}
+
+			if(Scpword == "") {
+				$("#err1f").html("Confirm Password");
+				if(erro == 1){
+					$("#supCPword").focus();
+					erro = 2;
+				}
+			}
+			else if(Spword != Scpword) {
+				$("#err1f").html("Password doesn't match");
+				if(erro == 1){
+					$("#supCPword").focus();
+					erro = 2;
+				}
+			}
+			else {
+				$("#err1f").html("&nbsp;");
+			}
+
+			if(erro == 1)   {
+				$("#displaySignUp").hide();
+				$("#displayLogin").show();
+			}
+		});
+		$("#submitL").click(function() {
+			let LogEmUn = $("#logEmUn").val();
+			let LogPword = $("#logPword").val();
+			var dLogEmUn = "abc";
+			var dLogPword = "12345678";
+			var erre = 1;
+
+			if(LogEmUn == "") {
+				$("#err2a").html("Enter UserName");
+				if(erre == 1) {
+					$("#logEmUn").focus();
+					erre = 2;
+				}
+			}
+			else if (LogEmUn == Suname || LogEmUn == dLogEmUn) {
+				$("#err2a").html("&nbsp;");
+			}
+			else {
+				$("#err2a").html("UserName incorrect");
+				if(erre == 1) {
+					$("#logEmUn").focus();
+					erre = 2;
+				}
+			}
+
+			if(LogPword == "") {
+				$("#err2b").html("Enter Password");
+				if(erre == 1) {
+					$("#logPword").focus(); 
+					erre = 2;
+				}
+			}
+			else if(LogPword == Spword || LogPword == dLogPword) {
+				$("#err2b").html("&nbsp;");
+			}
+			else {
+				$("#err2b").html("Password incorrect");
+				if(erre == 1) {
+					$("#logPword").focus(); 
+					erre = 2;
+				}
+			}
+
+			if(erre == 1) {
+				window.location.href = "./Redo Personal Info Form.html";
+				/*$("#displayLogin").hide();
+				$("#SLheading").hide();
+				$("#bTable").hide();
+				$("#welMsg").html("Welcome," + " " + LogEmUn);*/
+			}
+		});
+	});
+</script>
+</head>
+
+<body>
+<div class="container">
+<div class="center1">
+<h2 id="SLheading" style="text-align:center" style="display:block">Sign Up / Login</h2>
+<h1 id="welMsg" style="text-align:center"></h1>
+<table id="bTable" style="display:block" >
+<tr>
+	<td><input id="signUpButton" type="button" value="Sign Up"/></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><input id="loginButton" type="button" value="Login"/></td>
+</tr>
+</table>
+</div>
+<div class="center2">
+<table>
+
+<tr>
+<td>
+	<div id="displaySignUp" style="display:block">
+	    <table>
+		<tr>
+			<td><label for="supEmail">&emsp;Enter E-mail Id</label></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="text" id="supEmail" /></td><!--<input type="email" name="usremail">-->
+			<td></td>
+		</tr>
+		<tr>
+			<td><span id="err1a" style="color:red">&nbsp;</span></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label for="supFName">&emsp;Enter First Name</label></td>
+			<td><label for="supLName">&emsp;Enter Last Name</label></td>
+		</tr>
+		<tr>
+			<td><input type="text" id="supFName" /></td>
+			<td><input type="text" id="supLName" /></td>
+		</tr>
+		<tr>
+			<td><span id="err1b" style="color:red">&nbsp;</span></td>
+			<td><span id="err1c" style="color:red">&nbsp;</span></td>
+		</tr>
+		<tr>
+			<td><label for="supUName">&emsp;Enter UserName</label></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="text" id="supUName" /></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><span id="err1d" style="color:red">&nbsp;</span></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label for="supPword">&emsp;Enter Password</label></td>
+			<td><label for="supCPword">&emsp;Confirm Password</label></td>
+		</tr>
+		<tr>
+			<td><input type="password" id="supPword" /></td>
+			<td><input type="password" id="supCPword" /></td>
+		</tr>
+		<tr>
+			<td><span id="err1e" style="color:red">&nbsp;</span></td>
+			<td><span id="err1f" style="color:red">&nbsp;</span></td>
+		</tr>
+	    </table>
+	    <button id="submitS" type="button" onclick="submitS()">Submit</button>
+	</div>
+</td>
+<td>
+	<div  id="displayLogin" style="display:none">
+	    <table>
+		<tr>
+			<td><label for="logEmUn">&emsp;Enter Username</label></td>
+		</tr>
+		<tr>
+			<td><input type="text" id="logEmUn" /></td>
+		</tr>
+		<tr>
+			<td><span id="err2a" style="color:red">&nbsp;</span></td>
+		</tr>
+		<tr>
+			<td><label for="logPword">&emsp;Enter Password</label></td>
+		</tr>
+		<tr>
+			<td><input type="password" id="logPword" /></td>
+		</tr>
+		<tr>
+			<td><span id="err2b" style="color:red">&nbsp;</span></td>
+		</tr>
+	    </table>
+	    <button id="submitL" type="button" onclick="submitL()">Submit</button>
+	</div>
+</td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<style>
+.container { 
+  background: #c5ebd8;
+  opacity: 0.85;
+  margin: auto;
+  margin-top: 30px;
+  width: 500px;
+  height: 660px;
+  border: 3px solid #19cf74;
+  padding: 10px; 
+  border-radius: 30px;
+}
+.center1 {
+  margin: 0;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+input[type=button] {
+  padding: 7px 40px;
+  border-radius: 50px;
+  border: 2px solid #19cf74;
+  color: rgb(0, 0, 0);
+}
+input[type=button]:hover {
+  background: #19cf74;
+  color: white;
+}
+input[type=text] {
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #19cf74;
+  border-radius: 50px;
+  box-sizing: border-box;
+}
+input[type=password] {
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #19cf74;
+  border-radius: 50px;
+  box-sizing: border-box;
+}
+#submitL {
+  padding: 7px 30px;
+  border-radius: 50px;
+  border: 2px solid #19cf74;
+  color: black;
+}
+#submitL:hover {
+  background: #19cf74;
+  color: white;
+}
+#submitS {
+  padding: 7px 30px;
+  border-radius: 50px;
+  border: 2px solid #19cf74;
+  color: black;
+}
+#submitS:hover {
+  background: #19cf74;
+  color: white;
+}
+body {
+  background-image: url("leaves.jfif");
+}		
+</style>
+
+</body>
+</html>
